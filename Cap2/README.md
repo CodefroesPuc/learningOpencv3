@@ -8,7 +8,7 @@ We did (and described) that in the previous chapter already.
 - [ ] Talk about this example.
 
 #### 3 - Use the capture and store code in *Example 2-11* together with the `PyrDown()` code of *Example 2-6* to create a program that reads from a camera and stores downsampled color images to disk.
-- @include exercises2.cpp
+- @include Cap2/exercises2.cpp
 
 #### 4 - Modify the code in Exercise 3 and combine it with the window display code in *Example 2-2* to display the frames as they are processed.
 - [ ] Include source code
