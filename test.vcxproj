@@ -18,9 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="cap3\exercises3.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FA8E995D-A3D5-450B-965D-A6157FAE492C}</ProjectGuid>
     <RootNamespace>test</RootNamespace>
