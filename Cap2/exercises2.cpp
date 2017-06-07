@@ -1,8 +1,14 @@
+/**
+ * @file exercises2.cpp
+ * @brief All Exercises from Cap 2
+ * @author Guilherme Fróes silva
+ */
+
 #include <opencv2\opencv.hpp>
 #include <iostream>
 
 //void onChange(int level, void *) {
-//	
+//
 //}
 
 int main(int argc, char **argv) {
@@ -24,7 +30,7 @@ int main(int argc, char **argv) {
 		cv::imshow("Camera", cap_frame);
 
 		cv::createTrackbar("Reduction Level", "Camera", &level, 8);
-		char c = cvWaitKey(33);		
+		char c = cvWaitKey(33);
 		if (c == 'c') {
 			i++;
 			cap_frame.copyTo(out_frame);
@@ -40,7 +46,7 @@ int main(int argc, char **argv) {
 		if (c == 27) {
 			cv::destroyAllWindows;
 			break;
-		}		
+		}
 	}
 	return 0;
 }
