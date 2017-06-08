@@ -12,3 +12,5 @@ We did (and described) that in the previous chapter already.
 #### 4 - Modify the code in Exercise 3 and combine it with the window display code in *Example 2-2* to display the frames as they are processed.
 
 #### 5 - Modify the program of Exercise 4 with a trackbar slider control from Example 2-4 so that the user can dynamically vary the pyramid downsampling reduction level by factors of between 2 and 8. You may skip writing this to disk, but you should display the results.
+
+@include Cap2/exercises2.cpp
