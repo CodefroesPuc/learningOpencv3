@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['exercises2_2ecpp',['exercises2.cpp',['../exercises2_8cpp.html',1,'']]]
+  ['mainpage_2edox',['mainpage.dox',['../mainpage_8dox.html',1,'']]]
 ];

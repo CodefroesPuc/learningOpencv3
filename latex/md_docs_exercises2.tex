@@ -1,0 +1,68 @@
+\paragraph*{1 -\/ Using the install and build instructions in this book or at \href{http://opencv.org,}{\tt http\+://opencv.\+org,} build the library in both the debug and the release versions.}
+
+We did (and described) that in the previous chapter already.
+
+\paragraph*{2 -\/ Go to where you built the {\ttfamily ../opencv/samples/directory} and look for {\ttfamily lkdemo.\+cpp} (this is an example motion-\/tracking program). Attach a camera to your system and run the code. With the display window selected, type {\bfseries r} to initialize tracking. You can add points by clicking on video positions with the mouse. You can also switch to watching only the points ( and not the whole image) by typing {\bfseries n}. Typing {\bfseries n} again will toggle between \char`\"{}night\char`\"{} and \char`\"{}day\char`\"{} views.}
+
+
+\begin{DoxyItemize}
+\item \mbox{[} \mbox{]} Talk about this example.
+\end{DoxyItemize}
+
+\paragraph*{3 -\/ Use the capture and store code in {\itshape Example 2-\/11} together with the {\ttfamily Pyr\+Down()} code of {\itshape Example 2-\/6} to create a program that reads from a camera and stores downsampled color images to disk.}
+
+\paragraph*{4 -\/ Modify the code in Exercise 3 and combine it with the window display code in {\itshape Example 2-\/2} to display the frames as they are processed.}
+
+\paragraph*{5 -\/ Modify the program of Exercise 4 with a trackbar slider control from Example 2-\/4 so that the user can dynamically vary the pyramid downsampling reduction level by factors of between 2 and 8. You may skip writing this to disk, but you should display the results.}
+
+
+\begin{DoxyCodeInclude}
+
+\textcolor{preprocessor}{#include <opencv2\(\backslash\)opencv.hpp>}
+\textcolor{preprocessor}{#include <iostream>}
+
+\textcolor{comment}{//void onChange(int level, void *) \{}
+\textcolor{comment}{//}
+\textcolor{comment}{//\}}
+
+\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv) \{
+    cv::namedWindow(\textcolor{stringliteral}{"Camera"}, cv::WINDOW\_AUTOSIZE);
+    \textcolor{comment}{//cv::namedWindow("Processed", cv::WINDOW\_AUTOSIZE);}
+
+    cv::VideoCapture capture(0); \textcolor{comment}{//- using camera}
+
+    \textcolor{keywordtype}{double} fps = capture.get(cv::CAP\_PROP\_FPS);
+
+    cv::Mat cap\_frame, out\_frame;
+    \textcolor{keywordtype}{int} i = 0, level = 2;
+    \textcolor{keywordflow}{for} (;;) \{
+        capture >> cap\_frame;
+        \textcolor{keywordflow}{if} (cap\_frame.empty()) \{
+            std::cout << \textcolor{stringliteral}{"End of file."}  << std::endl;
+            \textcolor{keywordflow}{break};
+        \}
+        cv::imshow(\textcolor{stringliteral}{"Camera"}, cap\_frame);
+
+        cv::createTrackbar(\textcolor{stringliteral}{"Reduction Level"}, \textcolor{stringliteral}{"Camera"}, &level, 8);
+        \textcolor{keywordtype}{char} c = cvWaitKey(33);
+        \textcolor{keywordflow}{if} (c == \textcolor{charliteral}{'c'}) \{
+            i++;
+            cap\_frame.copyTo(out\_frame);
+            \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 1; j < level; j++)
+                cv::pyrDown(out\_frame, out\_frame);
+            cv::imshow(\textcolor{stringliteral}{"Processed"}, out\_frame);
+            cv::String filename = \textcolor{stringliteral}{"out\_"};
+            filename += std::to\_string(i) + \textcolor{stringliteral}{".png"};
+            std::cout << filename;
+            cv::imwrite(filename, out\_frame);
+        \}
+
+        \textcolor{keywordflow}{if} (c == 27) \{
+            cv::destroyAllWindows;
+            \textcolor{keywordflow}{break};
+        \}
+    \}
+    \textcolor{keywordflow}{return} 0;
+\}
+\end{DoxyCodeInclude}
+ 

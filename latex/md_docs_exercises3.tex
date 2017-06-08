@@ -1,0 +1,94 @@
+\paragraph*{1 -\/ Find and open {\ttfamily ../opencv/cxcore/included/cxtypes.h}. Read through and find the many conversion helper functions.}
+
+This path is probably legacy from the old Open\+CV (prior to 2.\+1) library. The new path is probably {\ttfamily ..\textbackslash{}opencv\textbackslash{}modules\textbackslash{}core\textbackslash{}include\textbackslash{}opencv2\textbackslash{}core\textbackslash{}types\+\_\+c.\+h} and for the new C++ types header {\ttfamily ..\textbackslash{}opencv\textbackslash{}modules\textbackslash{}core\textbackslash{}include\textbackslash{}opencv2\textbackslash{}core\textbackslash{}types.\+hpp}.
+
+Whole code is here \href{https://github.com/CodefroesPuc/learningOpencv3/blob/master/Cap3/exercises3.cpp}{\tt exercises3.\+cpp}
+\begin{DoxyEnumerate}
+\item Choose a negative floating-\/point number. 
+\begin{DoxyCodeInclude}
+    \textcolor{keywordtype}{float} number = 0.f; 
+    std::cout << \textcolor{stringliteral}{"Insert a negative floating-point number: "};
+    std::cin >> number;
+\end{DoxyCodeInclude}
+
+\item Take its absolute value, round it, and then take its ceiling and floor. 
+\begin{DoxyCodeInclude}
+    \textcolor{keywordtype}{float} abs = cv::abs(number);
+    \textcolor{keywordtype}{float} rounded = cvRound(abs);
+    \textcolor{keywordtype}{float} ceiled = cvCeil(rounded);
+    std::cout << \textcolor{stringliteral}{"Result is "} << ceiled << std::endl;
+\end{DoxyCodeInclude}
+
+\item Generate some random numbers. 
+\begin{DoxyCodeInclude}
+    cv::RNG rng(0xFFFFFFFF);
+    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 5; i++)
+    \{
+        \textcolor{keywordtype}{float} random = rng.uniform(0,255);
+        std::cout << random << std::endl;
+    \}
+\end{DoxyCodeInclude}
+
+\item Create a floating-\/point {\ttfamily cv\+::\+Point2f} and convert it to an integer {\ttfamily cv\+::\+Point}. Convert a {\ttfamily cv\+::\+Point} to a {\ttfamily cv\+::\+Point2f}. 
+\begin{DoxyCodeInclude}
+    cv::Point2f pntf(3.5, 3.5);
+    std::cout << pntf << std::endl;
+    cv::Point pnt = (cv::Point)pntf;
+    std::cout << pnt << std::endl;
+    std::cout << (cv::Point2f)pnt << std::endl;
+\end{DoxyCodeInclude}
+ \paragraph*{2 -\/ Compact matrix and vector types\+:}
+\end{DoxyEnumerate}
+
+\begin{DoxyNote}{Note}
+In the book it\textquotesingle{}s written {\ttfamily cv\+::\+Mat33f}, but there\textquotesingle{}s no such class.
+\end{DoxyNote}
+
+\begin{DoxyEnumerate}
+\item Using the {\ttfamily cv\+::\+Matx33f} and {\ttfamily cv\+::\+Vec3f} objects (respectively), create a 3x3 matrix and 3-\/row vector. 
+\begin{DoxyCodeInclude}
+    cv::Matx33f mat33(1, 2, 3, 4, 5, 6, 7, 8, 9);
+    std::cout << mat33 << std::endl;
+    cv::Vec3f vec3(1, 2, 3);
+    std::cout << vec3 << std::endl;
+\end{DoxyCodeInclude}
+
+\item Can you multiply them together directly? If not, why not? ~\newline
+ Here the authors haven\textquotesingle{}t explained why they meant by \char`\"{}multiply directly\char`\"{}, but no, it\textquotesingle{}s impossible to multiply by simply putting\+: 
+\begin{DoxyCodeInclude}
+    \textcolor{comment}{//std::cout << vec3.dot(mat33) << std::endl;}
+    \textcolor{comment}{// Not possible, but I don't really know why.}
+    \textcolor{comment}{// Code doesn't compile with error: }
+    \textcolor{comment}{// no suitable user - defined conversion from "cv::Matx33f" to "const cv::Matx<float, 3, 1>" exists }
+\end{DoxyCodeInclude}
+ \paragraph*{3 -\/ Compact matrix and vector template types\+:}
+\end{DoxyEnumerate}
+
+
+\begin{DoxyEnumerate}
+\item Using the {\ttfamily cv\+::\+Mat$<$$>$} and {\ttfamily cv\+::\+Vec$<$$>$} templates ( respectively), create a 3x3 matrix and 3-\/row vector. 
+\begin{DoxyCodeInclude}
+    cv::Matx<int,3,3> mat33t(1, 2, 3, 4, 5, 6, 7, 8, 9);
+    std::cout << mat33 << std::endl;
+    cv::Vec<int,3> vec3t(1, 2, 3);
+    std::cout << vec3 << std::endl; 
+\end{DoxyCodeInclude}
+
+\item Can you multiply them together directly? If not, why not? 
+\begin{DoxyCodeInclude}
+    \textcolor{comment}{//std::cout << vec3t.dot(mat33t) << std::endl;}
+    \textcolor{comment}{//no suitable user - defined conversion from "cv::Matx<int, 3, 3>" to "const cv::Matx<int, 3, 1>"
+       exists}
+\end{DoxyCodeInclude}
+
+\item Try type-\/casting the vector object to a 3x1 matrix, using the {\ttfamily cv\+::\+Mat$<$$>$} template. What happens now? 
+\begin{DoxyCodeInclude}
+    cv::Matx<int, 3, 1> mat2 = (cv::Matx<int, 3, 1>)vec3t;
+    std::cout << mat2 << std::endl;
+\end{DoxyCodeInclude}
+It simply works, the vector becomes a matrix, so it can be multiplied by another one doing\+: 
+\begin{DoxyCodeInclude}
+    std::cout << mat33t*mat2 << std::endl;
+\end{DoxyCodeInclude}
+
+\end{DoxyEnumerate}
