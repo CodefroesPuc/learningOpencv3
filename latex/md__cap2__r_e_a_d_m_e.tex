@@ -1,0 +1,21 @@
+\paragraph*{1 -\/ Using the install and build instructions in this book or at \href{http://opencv.org,}{\tt http\+://opencv.\+org,} build the library in both the debug and the release versions.}
+
+We did (and described) that in the previous chapter already.
+
+\paragraph*{2 -\/ Go to where you built the {\ttfamily ../opencv/samples/directory} and look for {\ttfamily lkdemo.\+cpp} (this is an example motion-\/tracking program). Attach a camera to your system and run the code. With the display window selected, type {\bfseries r} to initialize tracking. You can add points by clicking on video positions with the mouse. You can also switch to watching only the points ( and not the whole image) by typing {\bfseries n}. Typing {\bfseries n} again will toggle between \char`\"{}night\char`\"{} and \char`\"{}day\char`\"{} views.}
+
+
+\begin{DoxyItemize}
+\item \mbox{[} \mbox{]} Talk about this example.
+\end{DoxyItemize}
+
+\paragraph*{3 -\/ Use the capture and store code in {\itshape Example 2-\/11} together with the {\ttfamily Pyr\+Down()} code of {\itshape Example 2-\/6} to create a program that reads from a camera and stores downsampled color images to disk.}
+
+\paragraph*{4 -\/ Modify the code in Exercise 3 and combine it with the window display code in {\itshape Example 2-\/2} to display the frames as they are processed.}
+
+\paragraph*{5 -\/ Modify the program of Exercise 4 with a trackbar slider control from Example 2-\/4 so that the user can dynamically vary the pyramid downsampling reduction level by factors of between 2 and 8. You may skip writing this to disk, but you should display the results.}
+
+
+\begin{DoxyCodeInclude}
+\end{DoxyCodeInclude}
+ 

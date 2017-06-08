@@ -1,0 +1,58 @@
+\paragraph*{1 -\/ Find and open {\ttfamily ../opencv/cxcore/included/cxtypes.h}. Read through and find the many conversion helper functions.}
+
+This path is probably legacy from the old Open\+CV (prior to 2.\+1) library. The new path is probably {\ttfamily ..\textbackslash{}opencv\textbackslash{}modules\textbackslash{}core\textbackslash{}include\textbackslash{}opencv2\textbackslash{}core\textbackslash{}types\+\_\+c.\+h} and for the new C++ types header {\ttfamily ..\textbackslash{}opencv\textbackslash{}modules\textbackslash{}core\textbackslash{}include\textbackslash{}opencv2\textbackslash{}core\textbackslash{}types.\+hpp}.
+
+Whole code is here \href{https://github.com/CodefroesPuc/learningOpencv3/blob/master/Cap3/exercises3.cpp}{\tt exercises3.\+cpp}
+\begin{DoxyEnumerate}
+\item Choose a negative floating-\/point number. 
+\begin{DoxyCodeInclude}
+\end{DoxyCodeInclude}
+
+\item Take its absolute value, round it, and then take its ceiling and floor. 
+\begin{DoxyCodeInclude}
+\end{DoxyCodeInclude}
+
+\item Generate some random numbers. 
+\begin{DoxyCodeInclude}
+\end{DoxyCodeInclude}
+
+\item Create a floating-\/point {\ttfamily cv\+::\+Point2f} and convert it to an integer {\ttfamily cv\+::\+Point}. Convert a {\ttfamily cv\+::\+Point} to a {\ttfamily cv\+::\+Point2f}. 
+\begin{DoxyCodeInclude}
+\end{DoxyCodeInclude}
+ \paragraph*{2 -\/ Compact matrix and vector types\+:}
+\end{DoxyEnumerate}
+
+\begin{DoxyNote}{Note}
+In the book it\textquotesingle{}s written {\ttfamily cv\+::\+Mat33f}, but there\textquotesingle{}s no such class.
+\end{DoxyNote}
+
+\begin{DoxyEnumerate}
+\item Using the {\ttfamily cv\+::\+Matx33f} and {\ttfamily cv\+::\+Vec3f} objects (respectively), create a 3x3 matrix and 3-\/row vector. 
+\begin{DoxyCodeInclude}
+\end{DoxyCodeInclude}
+
+\item Can you multiply them together directly? If not, why not? ~\newline
+ Here the authors haven\textquotesingle{}t explained why they meant by \char`\"{}multiply directly\char`\"{}, but no, it\textquotesingle{}s impossible to multiply by simply putting\+: 
+\begin{DoxyCodeInclude}
+\end{DoxyCodeInclude}
+ \paragraph*{3 -\/ Compact matrix and vector template types\+:}
+\end{DoxyEnumerate}
+
+
+\begin{DoxyEnumerate}
+\item Using the {\ttfamily cv\+::\+Mat$<$$>$} and {\ttfamily cv\+::\+Vec$<$$>$} templates ( respectively), create a 3x3 matrix and 3-\/row vector. 
+\begin{DoxyCodeInclude}
+\end{DoxyCodeInclude}
+
+\item Can you multiply them together directly? If not, why not? 
+\begin{DoxyCodeInclude}
+\end{DoxyCodeInclude}
+
+\item Try type-\/casting the vector object to a 3x1 matrix, using the {\ttfamily cv\+::\+Mat$<$$>$} template. What happens now? 
+\begin{DoxyCodeInclude}
+\end{DoxyCodeInclude}
+It simply works, the vector becomes a matrix, so it can be multiplied by another one doing\+: 
+\begin{DoxyCodeInclude}
+\end{DoxyCodeInclude}
+
+\end{DoxyEnumerate}
