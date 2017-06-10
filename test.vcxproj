@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Cap3\exercises3.cpp" />
+    <ClCompile Include="Cap4\example4-2.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FA8E995D-A3D5-450B-965D-A6157FAE492C}</ProjectGuid>
