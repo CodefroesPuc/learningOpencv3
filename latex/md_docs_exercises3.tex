@@ -54,12 +54,9 @@ In the book it\textquotesingle{}s written {\ttfamily cv\+::\+Mat33f}, but there\
 \end{DoxyCodeInclude}
 
 \item Can you multiply them together directly? If not, why not? ~\newline
- Here the authors haven\textquotesingle{}t explained why they meant by \char`\"{}multiply directly\char`\"{}, but no, it\textquotesingle{}s impossible to multiply by simply putting\+: 
+ If by \char`\"{}multiply them together\char`\"{}, the authors mean Matx33f$\ast$\+Vec3, then it compiles as we are multiplying matrixes with dimensions 3x3 and a 3-\/elements vector. The values are right, but as the result is a vector, we don\textquotesingle{}t have the information if it is a line or column vector. 
 \begin{DoxyCodeInclude}
-    \textcolor{comment}{//std::cout << vec3.dot(mat33) << std::endl;}
-    \textcolor{comment}{// Not possible, but I don't really know why.}
-    \textcolor{comment}{// Code doesn't compile with error: }
-    \textcolor{comment}{// no suitable user - defined conversion from "cv::Matx33f" to "const cv::Matx<float, 3, 1>" exists }
+    std::cout << mat33 * vec3 << std::endl;
 \end{DoxyCodeInclude}
  \paragraph*{3 -\/ Compact matrix and vector template types\+:}
 \end{DoxyEnumerate}
@@ -71,24 +68,22 @@ In the book it\textquotesingle{}s written {\ttfamily cv\+::\+Mat33f}, but there\
     cv::Matx<int,3,3> mat33t(1, 2, 3, 4, 5, 6, 7, 8, 9);
     std::cout << mat33 << std::endl;
     cv::Vec<int,3> vec3t(1, 2, 3);
-    std::cout << vec3 << std::endl; 
+    std::cout << vec3t << std::endl;    
 \end{DoxyCodeInclude}
 
 \item Can you multiply them together directly? If not, why not? 
 \begin{DoxyCodeInclude}
-    \textcolor{comment}{//std::cout << vec3t.dot(mat33t) << std::endl;}
-    \textcolor{comment}{//no suitable user - defined conversion from "cv::Matx<int, 3, 3>" to "const cv::Matx<int, 3, 1>"
-       exists}
+    std::cout << mat33t * vec3t << std::endl;
 \end{DoxyCodeInclude}
-
+ It works the same way and for the same reason. The values are right, but as the result is a vector, we don\textquotesingle{}t have the information if it is a line or column vector.
 \item Try type-\/casting the vector object to a 3x1 matrix, using the {\ttfamily cv\+::\+Mat$<$$>$} template. What happens now? 
 \begin{DoxyCodeInclude}
-    cv::Matx<int, 3, 1> mat2 = (cv::Matx<int, 3, 1>)vec3t;
+    cv::Matx<int, 3, 1> mat2 = (cv::Matx<int, 3, 1>)vec3;
     std::cout << mat2 << std::endl;
 \end{DoxyCodeInclude}
-It simply works, the vector becomes a matrix, so it can be multiplied by another one doing\+: 
+It simply works, the vector becomes a matrix, so it can be multiplied by another one doing (inner dimensions do agree)\+: 
 \begin{DoxyCodeInclude}
-    std::cout << mat33t*mat2 << std::endl;
+    std::cout << mat33t * mat2 << std::endl;
 \end{DoxyCodeInclude}
-
+Now the result is correct as we got a 3x1 matrix (or column vector). 
 \end{DoxyEnumerate}

@@ -21,7 +21,7 @@ Whole code is here [exercises3.cpp](https://github.com/CodefroesPuc/learningOpen
 1. Using the `cv::Matx33f` and `cv::Vec3f` objects (respectively), create a 3x3 matrix and 3-row vector.
 @snippet ./Cap3/exercises3.cpp 2a
 2. Can you multiply them together directly? If not, why not? <br>
-  Here the authors haven't explained why they meant by "multiply directly", but no, it's impossible to multiply by simply putting:
+  If by "multiply them together", the authors mean Matx33f*Vec3, then it compiles as we are multiplying matrixes with dimensions 3x3 and a 3-elements vector. The values are right, but as the result is a vector, we don't have the information if it is a line or column vector.
 @snippet ./Cap3/exercises3.cpp 2b
 
 #### 3 - Compact matrix and vector template types:
@@ -29,7 +29,9 @@ Whole code is here [exercises3.cpp](https://github.com/CodefroesPuc/learningOpen
 @snippet ./Cap3/exercises3.cpp 3a
 2. Can you multiply them together directly? If not, why not?
 @snippet ./Cap3/exercises3.cpp 3b
+  It works the same way and for the same reason. The values are right, but as the result is a vector, we don't have the information if it is a line or column vector.
 3. Try type-casting the vector object to a 3x1 matrix, using the `cv::Mat<>` template. What happens now?
 @snippet ./Cap3/exercises3.cpp 3c
-It simply works, the vector becomes a matrix, so it can be multiplied by another one doing:
+It simply works, the vector becomes a matrix, so it can be multiplied by another one doing (inner dimensions do agree):
 @snippet ./Cap3/exercises3.cpp 3c2
+Now the result is correct as we got a 3x1 matrix (or column vector).
